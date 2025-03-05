@@ -1,0 +1,27 @@
+type Monfundme_CampaignClosed {
+  id: ID!
+  campaignId: String!
+}
+
+type Monfundme_CampaignCompleted {
+  id: ID!
+  event_id: String!
+  amountCollected: BigInt!
+}
+
+type Monfundme_CampaignCreated {
+  id: ID!
+  campaignId: String!
+  owner: String!
+  title: String!
+  target: BigInt!
+  deadline: BigInt!
+}
+
+type Monfundme_DonationReceived {
+  id: ID!
+  campaignId: String!
+  donator: String!
+  amount: BigInt!
+}
+

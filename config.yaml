@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=./node_modules/envio/evm.schema.json
+name: envio-indexer
+networks:
+- id: 10143
+  start_block: 0
+  contracts:
+  - name: monfundme
+    address:
+    - 0xeF435786af64ba812405C313E24fF36B8465B468
+    handler: src/EventHandlers.ts
+    events:
+    - event: CampaignClosed(bytes12 indexed campaignId)
+    - event: CampaignCompleted(bytes12 indexed id, uint256 amountCollected)
+    - event: CampaignCreated(bytes12 indexed campaignId, address indexed owner, string title, uint256 target, uint256 deadline)
+    - event: DonationReceived(bytes12 indexed campaignId, address indexed donator, uint256 amount)
