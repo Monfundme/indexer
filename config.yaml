@@ -1,15 +1,26 @@
 # yaml-language-server: $schema=./node_modules/envio/evm.schema.json
 name: envio-indexer
+field_selection:
+  transaction_fields:
+    - hash
 networks:
 - id: 10143
   start_block: 0
   contracts:
-  - name: monfundme
+  - name: Factory
     address:
-    - 0xeF435786af64ba812405C313E24fF36B8465B468
+    - 0xB3CF8637344Bd36108EA25008308A3fD6CcF3e4D
     handler: src/EventHandlers.ts
     events:
-    - event: CampaignClosed(bytes12 indexed campaignId)
-    - event: CampaignCompleted(bytes12 indexed id, uint256 amountCollected)
-    - event: CampaignCreated(bytes12 indexed campaignId, address indexed owner, string title, uint256 target, uint256 deadline)
-    - event: DonationReceived(bytes12 indexed campaignId, address indexed donator, uint256 amount)
+    - event: CampaignCreated(address indexed campaignAddress, address indexed owner, bytes12 indexed id)
+  - name: Campaign
+    handler: src/EventHandlers.ts
+    events:
+    - event: CampaignClosed(uint256 timestamp)
+    - event: CampaignCompleted(uint256 amountCollected)
+    - event: DonationReceived(address indexed donator, uint256 amount)
+    - event: FeePaid(address indexed to, uint256 amount)
+    - event: StatusUpdated(uint8 newStatus)
+    - event: TargetReached(uint256 timestamp)
+    - event: WithdrawalMade(address indexed to, uint256 amount)
+  
