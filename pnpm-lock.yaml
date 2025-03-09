@@ -11,6 +11,9 @@ importers:
       envio:
         specifier: 2.13.0
         version: 2.13.0(typescript@5.2.2)
+      viem:
+        specifier: 2.21.0
+        version: 2.21.0(typescript@5.2.2)
     devDependencies:
       '@types/chai':
         specifier: ^4.3.11

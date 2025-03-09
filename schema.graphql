@@ -1,55 +1,59 @@
-type Campaign_CampaignClosed {
-  id: ID!
+type Account {
+  id: ID! 
+  campaignsOwned: [Campaign!]! @derivedFrom(field: "owner")
+  donations: [Donation!]! @derivedFrom(field: "donator")
+  withdrawals: [Withdrawal!]! @derivedFrom(field: "recipient")
+  feesReceived: [FeePaid!]! @derivedFrom(field: "recipient")
+}
+
+type Campaign {
+  id: ID! # campaign address
+  owner: Account!
+  deadline: BigInt!
+  image: String
+  title: String
+  description: String
+  campaignId: String! # bytes12 id from creation
+  status: Int! # from StatusUpdated
+  createdAt: BigInt!
+  targetAmount: BigInt!
+  currentAmount: BigInt
+  isCompleted: Boolean!
+  isClosed: Boolean!
+  hasReachedTarget: Boolean!
+  closedAt: BigInt
+  completedAt: BigInt
+  targetReachedAt: BigInt
+  donations: [Donation!]! @derivedFrom(field: "campaign")
+  withdrawals: [Withdrawal!]! @derivedFrom(field: "campaign")
+  feesPaid: [FeePaid!]! @derivedFrom(field: "campaign")
+}
+
+type Donation {
+  id: ID! # tx hash
+  campaign: Campaign!
+  donator: Account!
+  amount: BigInt!
   timestamp: BigInt!
-  campaignAddress: String!
 }
 
-type Campaign_CampaignCompleted {
-  id: ID!
-  amountCollected: BigInt!
-  campaignAddress: String!
-}
-
-type Campaign_DonationReceived {
-  id: ID!
-  donator: String!
+type Withdrawal  {
+  id: ID! # tx hash
+  campaign: Campaign!
+  recipient: Account!
   amount: BigInt!
-  campaignAddress: String!
-  transactionHash: String!
-}
-
-type Campaign_FeePaid {
-  id: ID!
-  to: String!
-  amount: BigInt!
-  campaignAddress: String!
-  transactionHash: String!
-}
-
-type Campaign_StatusUpdated {
-  id: ID!
-  newStatus: BigInt!
-  campaignAddress: String!
-}
-
-type Campaign_TargetReached {
-  id: ID!
   timestamp: BigInt!
-  campaignAddress: String!
 }
 
-type Campaign_WithdrawalMade {
-  id: ID!
-  to: String!
+type FeePaid {
+  id: ID! # tx hash
+  campaign: Campaign!
+  recipient: Account!
   amount: BigInt!
-  campaignAddress: String!
-  transactionHash: String!
+  timestamp: BigInt!
 }
 
-type Factory_CampaignCreated {
-  id: ID!
-  campaignAddress: String!
-  owner: String!
-  event_id: String!
-}
+
+
+
 
