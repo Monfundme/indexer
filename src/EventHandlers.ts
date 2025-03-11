@@ -1,4 +1,4 @@
-import { Factory, Campaign, campaign, donation } from "generated"
+import { Factory, Campaign, campaign, account, donation } from "generated"
 import { getCampaignDetails } from "./ViemFunctions"
 
 Factory.CampaignCreated.handlerWithLoader({
@@ -34,8 +34,9 @@ Factory.CampaignCreated.handlerWithLoader({
             const entity: campaign = {
                 id: event.params.campaignAddress,
                 owner_id: event.params.owner,
-                campaignId: event.params.id,
+                proposalId: event.params.id,
                 status: 0,
+                deadline: BigInt(deadline as unknown as number),
                 description: description,
                 image: image,
                 title: title,
@@ -47,7 +48,6 @@ Factory.CampaignCreated.handlerWithLoader({
                 isCompleted: false,
                 isClosed: false,
                 hasReachedTarget: false,
-                deadline: BigInt(deadline as unknown as number),
                 createdAt: BigInt(event.block.timestamp),
             }
 

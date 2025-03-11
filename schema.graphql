@@ -13,7 +13,7 @@ type Campaign {
   image: String
   title: String
   description: String
-  campaignId: String! # bytes12 id from creation
+  proposalId: String! # bytes12 id from creation
   status: Int! # from StatusUpdated
   createdAt: BigInt!
   targetAmount: BigInt!
