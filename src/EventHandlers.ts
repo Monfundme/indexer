@@ -1,4 +1,4 @@
-import { Factory, Campaign, campaign, account, donation } from "generated"
+import { Factory, Campaign, campaign, donation } from "generated"
 import { getCampaignDetails } from "./ViemFunctions"
 
 Factory.CampaignCreated.handlerWithLoader({
@@ -42,6 +42,7 @@ Factory.CampaignCreated.handlerWithLoader({
                 title: title,
                 targetAmount: BigInt(target as unknown as number),
                 currentAmount: BigInt(0),
+                isActive: true,
                 closedAt: BigInt(0),
                 completedAt: BigInt(0),
                 targetReachedAt: BigInt(0),
@@ -95,6 +96,48 @@ Campaign.DonationReceived.handlerWithLoader({
             context.Campaign.set({
                 ...campaign,
                 currentAmount: campaign.currentAmount ? campaign.currentAmount + event.params.amount : event.params.amount
+            })
+        }
+    }
+})
+
+Campaign.CampaignCompleted.handlerWithLoader({
+    loader: async ({ event, context }) => {
+        const campaign = await context.Campaign.get(event.srcAddress)
+        return {
+            campaign
+        }
+    },
+    handler: async ({ event, context, loaderReturn }) => {
+        const { campaign } = loaderReturn;
+
+        if (campaign) {
+            context.Campaign.set({
+                ...campaign,
+                isActive: false,
+                isCompleted: true,
+                completedAt: BigInt(event.block.timestamp)
+            })
+        }
+    }
+})
+
+Campaign.WithdrawalMade.handlerWithLoader({
+    loader: async ({ event, context }) => {
+        const campaign = await context.Campaign.get(event.srcAddress)
+        return {
+            campaign
+        }
+    },
+    handler: async ({ event, context, loaderReturn }) => {
+        const { campaign } = loaderReturn;
+
+        if (campaign) {
+            context.Campaign.set({
+                ...campaign,
+                isActive: false,
+                isClosed: true,
+                closedAt: BigInt(event.block.timestamp),
             })
         }
     }
