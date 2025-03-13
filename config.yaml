@@ -9,7 +9,7 @@ networks:
   contracts:
   - name: Factory
     address:
-    - 0x12ec2155E0E655D145b49E465fF775092b855e27
+    - 0x3f83C528C8a8749B0Bc888B2A73e861a7776b249
     handler: src/EventHandlers.ts
     events:
     - event: CampaignCreated(address indexed campaignAddress, address indexed owner, bytes12 indexed id)
