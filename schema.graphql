@@ -18,6 +18,7 @@ type Campaign {
   createdAt: BigInt!
   targetAmount: BigInt!
   currentAmount: BigInt
+  isActive: Boolean! @index
   isCompleted: Boolean!
   isClosed: Boolean!
   hasReachedTarget: Boolean!

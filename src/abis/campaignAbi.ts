@@ -1,4 +1,4 @@
-[
+export const campaignAbi = [
   {
     "inputs": [
       {
@@ -354,4 +354,4 @@
     "stateMutability": "payable",
     "type": "receive"
   }
-]
+];
