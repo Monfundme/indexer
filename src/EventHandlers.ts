@@ -101,6 +101,8 @@ Campaign.DonationReceived.handlerWithLoader({
     }
 })
 
+
+
 Campaign.CampaignCompleted.handlerWithLoader({
     loader: async ({ event, context }) => {
         const campaign = await context.Campaign.get(event.srcAddress)
