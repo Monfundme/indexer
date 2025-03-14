@@ -1,5 +1,5 @@
 import { createPublicClient, http, Chain, formatEther } from "viem";
-import campaignAbi from "./abis/Campaign.json";
+import { campaignAbi } from "./abis/campaignAbi";
 
 type CampaignDetails = [string, string, string, string, string, BigInt, BigInt];
 

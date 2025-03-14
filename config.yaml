@@ -9,7 +9,7 @@ networks:
   contracts:
   - name: Factory
     address:
-    - 0x12ec2155E0E655D145b49E465fF775092b855e27
+    - 0x741CfB7bA971902c4D8AF131d544318A12B23741
     handler: src/EventHandlers.ts
     events:
     - event: CampaignCreated(address indexed campaignAddress, address indexed owner, bytes12 indexed id)
@@ -17,7 +17,7 @@ networks:
     handler: src/EventHandlers.ts
     events:
     - event: CampaignClosed(uint256 timestamp)
-    - event: CampaignCompleted(uint256 amountCollected)
+    - event: CampaignCompleted(uint256 amountCollected, uint256 timestamp)
     - event: DonationReceived(address indexed donator, uint256 amount)
     - event: FeePaid(address indexed to, uint256 amount)
     - event: StatusUpdated(uint8 newStatus)
