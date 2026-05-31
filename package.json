@@ -23,9 +23,7 @@
     "typescript": "5.2.2"
   },
   "dependencies": {
-    "dotenv": "^8.2.0",
     "envio": "2.13.0",
-    "node-fetch": "^3.3.2",
     "viem": "2.21.0"
   },
   "optionalDependencies": {
